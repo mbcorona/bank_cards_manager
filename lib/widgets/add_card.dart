@@ -10,7 +10,7 @@ class AddCard extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Flexible(child: SizedBox.shrink()),
+        const Flexible(child: SizedBox.shrink()),
         Flexible(
           child: Text(
             "Your card number",
@@ -39,7 +39,7 @@ class AddCard extends StatelessWidget {
                 .toList(),
           ),
         ),
-        Flexible(child: SizedBox.shrink()),
+        const Flexible(child: SizedBox.shrink()),
       ],
     );
   }

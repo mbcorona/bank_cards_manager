@@ -24,7 +24,7 @@ class ProfileSection extends StatelessWidget {
                   text: TextSpan(
                     text: "Hello",
                     style: Theme.of(context).textTheme.headline5,
-                    children: [
+                    children: const [
                       TextSpan(
                         text: " Bruno",
                         style: TextStyle(fontWeight: FontWeight.bold),
@@ -37,7 +37,7 @@ class ProfileSection extends StatelessWidget {
                   height: 50,
                   child: Stack(
                     children: [
-                      Align(
+                      const Align(
                         alignment: Alignment.centerLeft,
                         child: CircleAvatar(
                           radius: 25,
@@ -55,7 +55,7 @@ class ProfileSection extends StatelessWidget {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(50),
                           ),
-                          child: Icon(Icons.credit_card_outlined),
+                          child: const Icon(Icons.credit_card_outlined),
                         ),
                       )
                     ],

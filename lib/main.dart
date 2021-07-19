@@ -12,7 +12,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       home: HomePage(),
@@ -84,15 +84,15 @@ class _HomePageState extends State<HomePage> {
           ),
           // Add card
           AnimatedSwitcher(
-            duration: Duration(milliseconds: 500),
+            duration: const Duration(milliseconds: 500),
             child: page < 0.3
-                ? Padding(
+                ? const Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: Constants.padding * 2,
                     ),
                     child: AddCard(),
                   )
-                : null,
+                : const SizedBox.shrink(),
           ),
           // cards list
           Positioned(
@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
               children: cards
                   .map(
                     (e) => e == null
-                        ? SizedBox.shrink()
+                        ? const SizedBox.shrink()
                         : Transform.translate(
                             offset: Offset(
                               page < 1 ? (1 - pageClamp) * 50 : 0,
@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage> {
               switchInCurve: Curves.easeOut,
               switchOutCurve: Curves.easeIn,
               duration: const Duration(milliseconds: 150),
-              child: pageClamp < .9 ? SizedBox.shrink() : ProfileSection(),
+              child: pageClamp < .9 ? const SizedBox.shrink() : const ProfileSection(),
             ),
           ),
 
@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage> {
               switchOutCurve: Curves.easeIn,
               duration: const Duration(milliseconds: 100),
               child: pageClamp < .9
-                  ? SizedBox.shrink()
+                  ? const SizedBox.shrink()
                   : TweenAnimationBuilder(
                       key: Key(cards[page.round()]!.expenses.first.description),
                       tween: Tween<double>(begin: 25.0, end: 0),
