@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: AddCard(),
                   )
-                : const SizedBox.shrink(),
+                : null,
           ),
           // cards list
           Positioned(
