@@ -8,9 +8,8 @@ class AddCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Flexible(child: SizedBox.shrink()),
         Flexible(
           child: Text(
             "Your card number",
@@ -21,10 +20,10 @@ class AddCard extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 6,
+          flex: 2,
           child: GridView.count(
             crossAxisCount: 3,
-            children: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+            children: List.generate(9, (index) => index + 1)
                 .map(
                   (e) => Center(
                     child: Text(
@@ -39,7 +38,25 @@ class AddCard extends StatelessWidget {
                 .toList(),
           ),
         ),
-        const Flexible(child: SizedBox.shrink()),
+        Flexible(
+          child: ConstrainedBox(
+            constraints: BoxConstraints.tight(
+              const Size(
+                double.infinity,
+                60,
+              ),
+            ),
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                primary: const Color(0xFF000022),
+              ),
+              child: const Text("Add card", style: TextStyle(
+                fontSize: 25
+              ),),
+            ),
+          ),
+        )
       ],
     );
   }

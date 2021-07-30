@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Bank App',
       debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
   double page = 1;
   double pageClamp = 1;
 
-  pageListener() {
+  void pageListener() {
     setState(() {
       page = _pg.page!;
       pageClamp = page.clamp(0, 1);
