@@ -36,10 +36,34 @@ class _HomePageState extends State<HomePage> {
   double page = 1;
   double pageClamp = 1;
 
+  late Size size;
+
+  double verPos = 0.0;
+
+  Duration defaultDuration = const Duration(milliseconds: 300);
+
   void pageListener() {
     setState(() {
       page = _pg.page!;
       pageClamp = page.clamp(0, 1);
+    });
+  }
+
+  void onVerticalDrad(DragUpdateDetails details) {
+    setState(() {
+      verPos += details.primaryDelta!;
+      verPos = verPos.clamp(0, double.infinity);
+    });
+  }
+
+  void onVerticalDradEnds(DragEndDetails details) {
+    setState(() {
+      if(details.primaryVelocity! > 500 || verPos > size.height / 2){
+        verPos = size.height - 40;
+      }
+      if(details.primaryVelocity! < -500 || verPos < size.height / 2){
+        verPos = 0;
+      }
     });
   }
 
@@ -57,14 +81,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
         children: [
           // Add card background
           Positioned(
-            top: pageClamp * size.height * .275,
-            bottom: pageClamp * size.height * .225,
+            top: pageClamp * size.height * .275 + verPos,
+            bottom: pageClamp * size.height * .225 -verPos,
             left: pageClamp * size.width * .1,
             right: pageClamp * size.width * .2,
             child: Transform.translate(
@@ -84,7 +108,7 @@ class _HomePageState extends State<HomePage> {
           ),
           // Add card
           AnimatedSwitcher(
-            duration: const Duration(milliseconds: 500),
+            duration: defaultDuration,
             child: page < 0.3
                 ? const Padding(
                     padding: EdgeInsets.symmetric(
@@ -96,8 +120,8 @@ class _HomePageState extends State<HomePage> {
           ),
           // cards list
           Positioned(
-            top: page == 0 ? 0 : size.height * .25,
-            bottom: page == 0 ? 0 : size.height * .2,
+            top: page == 0 ? 0 : (size.height * .25) + verPos,
+            bottom: page == 0 ? 0 : size.height * .2 - verPos,
             left: 0,
             right: 0,
             child: PageView(
@@ -121,21 +145,29 @@ class _HomePageState extends State<HomePage> {
           ),
 
           // Profile card
-          Positioned(
-            top: MediaQuery.of(context).padding.top,
-            left: size.width * .1,
-            right: size.width * .1,
-            bottom: size.height * .75,
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeOut,
+            top: MediaQuery.of(context).padding.top - verPos,
+            left: (size.width * .1 - verPos).clamp(0, double.infinity),
+            right: (size.width * .1 - verPos).clamp(0, double.infinity),
+            bottom: size.height * .75 - verPos,
             child: AnimatedSwitcher(
               switchInCurve: Curves.easeOut,
               switchOutCurve: Curves.easeIn,
               duration: const Duration(milliseconds: 150),
-              child: pageClamp < .9 ? const SizedBox.shrink() : const ProfileSection(),
+              child: pageClamp < .9
+                  ? const SizedBox.shrink()
+                  : GestureDetector(
+                      onVerticalDragUpdate: onVerticalDrad,
+                      onVerticalDragEnd: onVerticalDradEnds,
+                      child: ProfileSection(verticalPos: verPos,),
+                    ),
             ),
           ),
 
           Positioned(
-            top: size.height * .85,
+            top: size.height * .85 + verPos,
             left: size.width * .1,
             right: size.width * .1,
             child: AnimatedSwitcher(
