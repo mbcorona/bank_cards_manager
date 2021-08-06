@@ -1,6 +1,6 @@
 # bank_calculator
 
-A Flutter Challenge from the latam comunity.
+A Flutter Challenge from the latam community.
 
 ## Demo
 
