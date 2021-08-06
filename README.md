@@ -4,7 +4,7 @@ A Flutter Challenge from the latam comunity.
 
 ## Demo
 
-<img src="https://media.giphy.com/media/2xNBCb07oojLHQxTO5/giphy.gif" width="300">
+<img src="https://media.giphy.com/media/2xNBCb07oojLHQxTO5/giphy-downsized.gif" width="300">
 
 ## Getting Started
 
